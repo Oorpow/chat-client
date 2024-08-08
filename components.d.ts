@@ -20,7 +20,12 @@ declare module 'vue' {
     VarBottomNavigation: typeof import('@varlet/ui')['_BottomNavigationComponent']
     VarBottomNavigationItem: typeof import('@varlet/ui')['_BottomNavigationItemComponent']
     VarButton: typeof import('@varlet/ui')['_ButtonComponent']
+    VarCol: typeof import('@varlet/ui')['_ColComponent']
+    VarForm: typeof import('@varlet/ui')['_FormComponent']
     VarIcon: typeof import('@varlet/ui')['_IconComponent']
+    VarInput: typeof import('@varlet/ui')['_InputComponent']
+    VarRow: typeof import('@varlet/ui')['_RowComponent']
+    VarSpace: typeof import('@varlet/ui')['_SpaceComponent']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
   }
 }
