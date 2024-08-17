@@ -3,20 +3,20 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import components from 'unplugin-vue-components/vite'
-import autoImport from 'unplugin-auto-import/vite'
-import { VarletImportResolver } from '@varlet/import-resolver'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import { VantResolver } from '@vant/auto-import-resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    components({
-      resolvers: [VarletImportResolver()]
+    Components({
+      resolvers: [VantResolver()]
     }),
-    autoImport({
-      resolvers: [VarletImportResolver({ autoImport: true })]
+    AutoImport({
+      resolvers: [VantResolver()]
     })
   ],
   resolve: {

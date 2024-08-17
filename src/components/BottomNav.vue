@@ -1,32 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const active = ref('chat')
-
-const tabList = [
-  { path: '/chat', name: 'chat', icon: 'chat-processing-outline', label: '消息' },
-  { path: '/directory', name: 'directory', icon: 'account-supervisor-outline', label: '通讯录' },
-  { path: '/my', name: 'my', icon: 'account-circle-outline', label: '我' }
+const tabbarList = [
+  { icon: 'chat-o', name: '聊天', to: '/chat' },
+  { icon: 'friends-o', name: '通讯录', to: '/directory' },
+  { icon: 'manager-o', name: '我', to: '/my' }
 ]
-
-function handleChangeTab(active) {
-  router.push({ name: active })
-}
 </script>
 
 <template>
-  <var-bottom-navigation v-model:active="active" fixed @change="handleChangeTab">
-    <var-bottom-navigation-item
-      :name="tab.name"
-      :label="tab.label"
-      :icon="tab.icon"
-      :key="tab.path"
-      v-for="tab in tabList"
-    />
-  </var-bottom-navigation>
+  <van-tabbar route>
+    <van-tabbar-item
+      v-for="tabbarItem in tabbarList"
+      :key="tabbarItem.name"
+      :icon="tabbarItem.icon"
+      :to="tabbarItem.to"
+      >{{ tabbarItem.name }}</van-tabbar-item
+    >
+  </van-tabbar>
 </template>
 
 <style scoped></style>

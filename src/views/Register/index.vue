@@ -1,41 +1,38 @@
 <script setup>
 import { ref } from 'vue'
 
-const form = ref(null)
+const username = ref('')
+const password = ref('')
 
-const formData = ref({
-  username: '',
-  password: ''
-})
-
-function handleRegister() {
-  // 校验表单
-  form.value.validate()
-  console.log('注册')
+const onSubmit = (values) => {
+  console.log('submit: ', values)
 }
 </script>
 
 <template>
   <div class="flex items-center justify-center min-h-screen">
-    <var-form ref="form" scroll-to-error="start" class="w-[90%]">
-      <var-space direction="column" :size="[15, 0]">
-        <var-input
-          placeholder="请输入用户名"
-          :rules="[(v) => !!v || '用户名不能为空']"
-          v-model="formData.username"
+    <van-form @submit="onSubmit">
+      <van-cell-group inset>
+        <van-field
+          v-model="username"
+          name="用户名"
+          label="用户名"
+          placeholder="用户名"
+          :rules="[{ required: true, message: '请填写用户名' }]"
         />
-        <var-input
+        <van-field
+          v-model="password"
           type="password"
-          placeholder="请输入密码"
-          :rules="[(v) => !!v || '密码不能为空', (v) => v.length >= 6 || '密码长度不能低于6位']"
-          v-model="formData.password"
+          name="密码"
+          label="密码"
+          placeholder="密码"
+          :rules="[{ required: true, message: '请填写密码' }]"
         />
-        <var-button type="primary" class="w-full" @click="handleRegister"> 注册 </var-button>
-        <var-button type="primary" class="w-full" @click="$router.push('/login')">
-          已有账户,去登录
-        </var-button>
-      </var-space>
-    </var-form>
+      </van-cell-group>
+      <div style="margin: 16px">
+        <van-button round block type="primary" native-type="submit"> 提交 </van-button>
+      </div>
+    </van-form>
   </div>
 </template>
 
