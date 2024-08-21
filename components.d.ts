@@ -10,6 +10,7 @@ declare module 'vue' {
     BottomNav: typeof import('./src/components/BottomNav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Signature: typeof import('./src/components/Signature.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanCellGroup: typeof import('vant/es')['CellGroup']
     VanField: typeof import('vant/es')['Field']
