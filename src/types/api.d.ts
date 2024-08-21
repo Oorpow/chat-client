@@ -1,5 +1,7 @@
 declare module API {
-  export interface UserRegisterForm {
+  interface UserLoginForm extends UserRegisterForm {}
+
+  interface UserRegisterForm {
     username: string
     password: string
   }
