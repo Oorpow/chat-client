@@ -12,9 +12,12 @@ export const useUserStore = defineStore(
      * @param data 登录表单
      */
     async function login(data: API.UserLoginForm) {
-      const res = await userLogin(data)
-      // 存储token
-      accessToken.value = res.data
+      try {
+        const res = await userLogin(data)
+        setToken(res.data)
+      } catch (error) {
+        return error
+      }
     }
 
     /**
@@ -25,12 +28,17 @@ export const useUserStore = defineStore(
       await userRegister(data)
     }
 
+    function setToken(token: string) {
+      accessToken.value = token
+    }
+
     /**
      * 获取用户的基本信息
      */
     function authInfo() {}
 
     return {
+      accessToken,
       login,
       authInfo,
       register
@@ -38,6 +46,7 @@ export const useUserStore = defineStore(
   },
   {
     persist: {
+      storage: localStorage,
       key: 'oor-chat',
       paths: ['accessToken']
     }

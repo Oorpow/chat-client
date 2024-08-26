@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user'
+import { showFailToast, showLoadingToast } from 'vant'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
+const router = useRouter()
 
 const form = ref<API.UserLoginForm>({
   username: '',
@@ -10,7 +13,17 @@ const form = ref<API.UserLoginForm>({
 })
 
 const onSubmit = async (values: API.UserLoginForm) => {
-  await userStore.login(values)
+  showLoadingToast({
+    message: '加载中...',
+    forbidClick: true
+  })
+  const err = await userStore.login(values)
+  if (!err) {
+    // 保存token，跳转至首页
+    setTimeout(() => {
+      router.push('/chat')
+    }, 1000)
+  }
 }
 </script>
 
@@ -20,7 +33,7 @@ const onSubmit = async (values: API.UserLoginForm) => {
       <van-cell-group inset>
         <van-field
           v-model="form.username"
-          name="用户名"
+          name="username"
           label="用户名"
           placeholder="用户名"
           :rules="[{ required: true, message: '请填写用户名' }]"
@@ -28,7 +41,7 @@ const onSubmit = async (values: API.UserLoginForm) => {
         <van-field
           v-model="form.password"
           type="password"
-          name="密码"
+          name="password"
           label="密码"
           placeholder="密码"
           :rules="[{ required: true, message: '请填写密码' }]"

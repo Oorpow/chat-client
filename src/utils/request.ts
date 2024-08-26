@@ -1,9 +1,11 @@
+import { useUserStore } from '@/stores/user'
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse,
   InternalAxiosRequestConfig
 } from 'axios'
+import { showFailToast, showToast } from 'vant'
 
 interface OpInterceptors<T = AxiosResponse> {
   requestInterceptor?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig
@@ -37,9 +39,9 @@ class OpRequest {
 
     // 通用拦截器
     this.instance.interceptors.request.use((config) => {
-      const token = localStorage.getItem('token') || ''
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+      const userStore = useUserStore()
+      if (userStore.accessToken) {
+        config.headers.Authorization = `Bearer ${userStore.accessToken}`
       }
       return config
     })
@@ -49,23 +51,29 @@ class OpRequest {
         return res.data
       },
       (err) => {
-        // TODO 添加一个用于错误提示的message
-        return err.response
+        showFailToast(err.response.data.message)
+        return Promise.reject(err.response.data.message)
       }
     )
   }
 
   request<T>(config: OpConfig<T>): Promise<T> {
-    return new Promise((resolve) => {
-      this.instance.request<any, T>(config).then((res) => {
-        resolve(res)
-      })
+    return new Promise((resolve, reject) => {
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          console.log(res)
+          resolve(res)
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
   }
 }
 
 export const commonOpReq = new OpRequest({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000/api',
   timeout: 1000 * 10
 })
 

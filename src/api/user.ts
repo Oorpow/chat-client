@@ -1,15 +1,9 @@
 import { commonOpReq } from '@/utils/request'
 
-interface CommonDataRes<T = any> {
-  data?: T
-  code: number
-  message: string
-}
-
 export const userLogin = (data: API.UserLoginForm) => {
-  return commonOpReq.request<CommonDataRes<string>>({
+  return commonOpReq.request<API.CommonDataRes<string>>({
     method: 'POST',
-    url: '/login',
+    url: '/user/login',
     data
   })
 }
@@ -17,13 +11,19 @@ export const userLogin = (data: API.UserLoginForm) => {
 export const userRegister = (data: API.UserRegisterForm) => {
   return commonOpReq.request({
     method: 'POST',
-    url: '/register',
+    url: '/user/register',
     data
   })
 }
 
 export const userAuthInfo = () => {
   return commonOpReq.request({
-    url: '/auth'
+    url: '/user/auth'
+  })
+}
+
+export const getFriendList = () => {
+  return commonOpReq.request({
+    url: '/user/friends'
   })
 }
