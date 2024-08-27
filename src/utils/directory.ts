@@ -4,7 +4,7 @@ import pinyin from 'pinyin'
  * 构造通讯录数据结构
  * @param nameList 用户名列表
  */
-export function createDirectory(nameList: string[]) {
+export function createDirectory(nameList: string[]): Map<string, string[]> {
   const letters = [
     'A',
     'B',

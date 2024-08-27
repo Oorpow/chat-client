@@ -1,30 +1,37 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
-import { getFriendshipList } from '@/api/friend'
+import { getFriendshipList, searchFriendByUsername } from '@/api/friend'
 import { createDirectory } from '@/utils/directory'
 
-const searchValue = ref('')
+const directory = ref<Map<string, string[]> | null>(null)
 
-function handleSearchUser(value: string) {
-  // TODO 发送请求，过滤通讯录
-  console.log(value)
-}
-
-const debounceSearch = useDebounceFn(handleSearchUser, 1000)
-
-const directory = ref(null)
-
-// 获取通讯录
-async function getDirectory() {
-  const { data } = await getFriendshipList()
-  // 将通讯录里的名字，摘出来，交给拼音进行处理，按照首字母进行分组、排序
-  const nameList = data.map((friend) => friend.username)
+// 构造通讯录数据结构
+function makeDirectoryData(nameList: string[]) {
   const directoryMap = createDirectory(nameList)
   directory.value = directoryMap
 }
 
+// 获取通讯录
+async function getDirectory() {
+  const { data } = await getFriendshipList()
+  const nameList = data.map((friend) => friend.username)
+  makeDirectoryData(nameList)
+}
+
 getDirectory()
+
+const searchValue = ref('')
+
+// 搜索好友，通讯录过滤
+async function handleSearchUser(value: string) {
+  const { data } = await searchFriendByUsername({ username: value })
+  const nameList = data.map((friend) => friend.username)
+  makeDirectoryData(nameList)
+}
+
+// 针对搜索做防抖处理
+const debounceSearch = useDebounceFn(handleSearchUser, 1000)
 </script>
 
 <template>

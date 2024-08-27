@@ -38,6 +38,10 @@ declare module API {
     friendId: number
   }
 
+  interface SearchFriendRequest {
+    username: string
+  }
+
   interface FriendInfo extends UserInfo {
     id: number
     username: string

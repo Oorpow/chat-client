@@ -49,3 +49,14 @@ export const deleteFriendship = (data: API.DeleteFriendship) => {
     data
   })
 }
+
+/**
+ * 根据用户名查询好友
+ * @param data
+ * @returns
+ */
+export const searchFriendByUsername = (data: API.SearchFriendRequest) => {
+  return commonOpReq.request<API.CommonDataRes<API.FriendInfo[]>>({
+    url: `/friendship/search?username=${data.username}`
+  })
+}
