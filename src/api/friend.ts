@@ -1,6 +1,6 @@
 import { commonOpReq } from '@/utils/request'
 
-// 发送好友请求
+/** 发送好友请求 */
 export const sendFriendshipRequest = (data: API.FriendShipRequest) => {
   return commonOpReq.request({
     method: 'POST',
@@ -9,21 +9,21 @@ export const sendFriendshipRequest = (data: API.FriendShipRequest) => {
   })
 }
 
-// 获取好友申请列表
+/** 获取好友申请列表 */
 export const getFriendshipRequestList = () => {
   return commonOpReq.request({
     url: '/friendship/list'
   })
 }
 
-// 获取好友列表
+/** 获取好友列表 */
 export const getFriendshipList = () => {
-  return commonOpReq.request({
+  return commonOpReq.request<API.CommonDataRes<API.FriendInfo[]>>({
     url: '/friendship/friends'
   })
 }
 
-// 同意好友请求 & 添加好友
+/** 同意请求 & 添加好友 */
 export const agreeFriendshipRequest = (data: API.AgreeFriendshipRequest) => {
   return commonOpReq.request({
     method: 'POST',
@@ -32,7 +32,7 @@ export const agreeFriendshipRequest = (data: API.AgreeFriendshipRequest) => {
   })
 }
 
-// 拒绝好友请求
+/** 拒绝好友请求 */
 export const rejectFriendshipRequest = (data: API.RejectFriendshipRequest) => {
   return commonOpReq.request({
     method: 'POST',
@@ -41,7 +41,7 @@ export const rejectFriendshipRequest = (data: API.RejectFriendshipRequest) => {
   })
 }
 
-// 删除好友
+/** 删除好友 */
 export const deleteFriendship = (data: API.DeleteFriendship) => {
   return commonOpReq.request({
     method: 'POST',

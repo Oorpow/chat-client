@@ -1,6 +1,10 @@
 import { commonOpReq } from '@/utils/request'
 
-// 发起私聊
+/**
+ * 发起私聊
+ * @param data
+ * @returns
+ */
 export const sendPrivateChat = (data: API.PrivateChat) => {
   return commonOpReq.request({
     method: 'POST',
@@ -9,7 +13,11 @@ export const sendPrivateChat = (data: API.PrivateChat) => {
   })
 }
 
-// 创建群聊
+/**
+ * 创建群聊
+ * @param data
+ * @returns
+ */
 export const createChatRoom = (data: API.CreateChatRoom) => {
   return commonOpReq.request({
     method: 'POST',
@@ -18,7 +26,11 @@ export const createChatRoom = (data: API.CreateChatRoom) => {
   })
 }
 
-// 加入群聊
+/**
+ * 加入群聊
+ * @param data
+ * @returns
+ */
 export const joinChatRoom = (data: API.JoinChatRoom) => {
   return commonOpReq.request({
     method: 'POST',
@@ -27,7 +39,11 @@ export const joinChatRoom = (data: API.JoinChatRoom) => {
   })
 }
 
-// 退出群聊
+/**
+ * 退出群聊
+ * @param data
+ * @returns
+ */
 export const quitChatRoom = (data: API.QuitChatRoom) => {
   return commonOpReq.request({
     method: 'POST',
@@ -36,7 +52,10 @@ export const quitChatRoom = (data: API.QuitChatRoom) => {
   })
 }
 
-// 获取所有聊天
+/**
+ * 获取全量聊天信息
+ * @returns
+ */
 export const getAllChat = () => {
   return commonOpReq.request({
     url: '/chatroom/group/list'
