@@ -5,11 +5,22 @@ declare module API {
     message: string
   }
 
+  interface CommonDate {
+    createTime: string
+    updateTime: string
+  }
+
   interface UserLoginForm extends UserRegisterForm {}
 
   interface UserRegisterForm {
     username: string
     password: string
+  }
+
+  interface UserInfo extends CommonDate {
+    id: number
+    username: string
+    avatar?: string
   }
 
   interface FriendShipRequest {
@@ -25,6 +36,12 @@ declare module API {
 
   interface DeleteFriendship {
     friendId: number
+  }
+
+  interface FriendInfo extends UserInfo {
+    id: number
+    username: string
+    avatar?: string
   }
 
   interface PrivateChat {

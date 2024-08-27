@@ -1,11 +1,12 @@
-import { userLogin, userRegister } from '@/api/user'
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { userAuthInfo, userLogin, userRegister } from '@/api/user'
 
 export const useUserStore = defineStore(
   'user',
   () => {
     const accessToken = ref('')
+    const userInfo = ref<API.UserInfo | null>(null)
 
     /**
      * 用户登录
@@ -32,13 +33,25 @@ export const useUserStore = defineStore(
       accessToken.value = token
     }
 
+    function setUserInfo(info: API.UserInfo) {
+      userInfo.value = info
+    }
+
     /**
      * 获取用户的基本信息
      */
-    function authInfo() {}
+    async function authInfo() {
+      try {
+        const res = await userAuthInfo()
+        setUserInfo(res.data)
+      } catch (error) {
+        return error
+      }
+    }
 
     return {
       accessToken,
+      userInfo,
       login,
       authInfo,
       register
@@ -48,7 +61,7 @@ export const useUserStore = defineStore(
     persist: {
       storage: localStorage,
       key: 'oor-chat',
-      paths: ['accessToken']
+      paths: ['accessToken', 'userInfo']
     }
   }
 )

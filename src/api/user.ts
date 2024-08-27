@@ -17,13 +17,7 @@ export const userRegister = (data: API.UserRegisterForm) => {
 }
 
 export const userAuthInfo = () => {
-  return commonOpReq.request({
+  return commonOpReq.request<API.CommonDataRes<API.UserInfo>>({
     url: '/user/auth'
-  })
-}
-
-export const getFriendList = () => {
-  return commonOpReq.request({
-    url: '/user/friends'
   })
 }

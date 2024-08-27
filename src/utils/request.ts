@@ -62,7 +62,6 @@ class OpRequest {
       this.instance
         .request<any, T>(config)
         .then((res) => {
-          console.log(res)
           resolve(res)
         })
         .catch((err) => {
