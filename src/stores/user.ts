@@ -9,13 +9,14 @@ export const useUserStore = defineStore(
     const userInfo = ref<API.UserInfo | null>(null)
 
     /**
-     * 用户登录
+     * 用户登录 保存token、获取用户个人信息并保存
      * @param data 登录表单
      */
     async function login(data: API.UserLoginForm) {
       try {
         const res = await userLogin(data)
         setToken(res.data)
+        await authInfo()
       } catch (error) {
         return error
       }

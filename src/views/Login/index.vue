@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { showFailToast, showLoadingToast } from 'vant'
 import { ref } from 'vue'
+import { showLoadingToast } from 'vant'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
@@ -21,7 +21,7 @@ const onSubmit = async (values: API.UserLoginForm) => {
   if (!err) {
     // 保存token，跳转至首页
     setTimeout(() => {
-      router.push('/chat')
+      router.replace('/chat')
     }, 1000)
   }
 }
