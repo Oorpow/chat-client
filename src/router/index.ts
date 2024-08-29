@@ -38,4 +38,24 @@ const router = createRouter({
   ]
 })
 
+const whiteList = ['/login', '/register']
+
+router.beforeEach((to, from, next) => {
+  if (whiteList.includes(to.path)) {
+    next()
+  } else {
+    const chatStorage = localStorage.getItem('oor-chat')
+    if (chatStorage) {
+      const storage = JSON.parse(chatStorage)
+      if (storage.accessToken) {
+        next()
+      } else {
+        next('/login')
+      }
+    } else {
+      next()
+    }
+  }
+})
+
 export default router
