@@ -1,19 +1,19 @@
 <script setup lang="ts">
 type Props = {
-  src: string
+  width?: number
+  radius?: number
+  src?: string
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  width: 100,
+  src: '/avatar_github.jpeg',
+  radius: 5
+})
 </script>
 
 <template>
   <div>
-    <van-image
-      width="100px"
-      height="100px"
-      fit="cover"
-      :src="props.src || '/avatar_github.jpeg'"
-      :radius="5"
-    />
+    <van-image :width="width" fit="cover" :src="props.src" :radius="radius" />
   </div>
 </template>
