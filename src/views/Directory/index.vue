@@ -40,7 +40,7 @@ const debounceSearch = useDebounceFn(handleSearchUser, 1000)
  */
 function handleCheckBusinessCard(id: number) {
   router.push({
-    path: '/child/business-card',
+    path: '/business-card',
     query: {
       id
     }

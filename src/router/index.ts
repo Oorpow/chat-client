@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/layout/default.vue'
+import ChildWithBack from '@/layout/ChildWithBack.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,11 @@ const router = createRouter({
           component: () => import('@/views/My/index.vue')
         }
       ]
+    },
+    {
+      path: '/business-card',
+      name: 'businessCard',
+      component: () => import('@/views/BusinessCard/index.vue')
     }
   ]
 })

@@ -21,3 +21,9 @@ export const userAuthInfo = () => {
     url: '/user/auth'
   })
 }
+
+export const checkBusinessCardById = (data: API.CheckUserBusinessCardRequest) => {
+  return commonOpReq.request<API.CommonDataRes<API.BusinessCardInfo>>({
+    url: `/user/${data.id}`
+  })
+}

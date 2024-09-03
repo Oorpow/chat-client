@@ -20,7 +20,17 @@ declare module API {
   interface UserInfo extends CommonDate {
     id: number
     username: string
-    avatar?: string
+    avatar: string
+  }
+
+  interface CheckUserBusinessCardRequest {
+    id: number | string
+  }
+
+  type BusinessCardInfo = {
+    id: number
+    username: string
+    avatar: string
   }
 
   interface FriendShipRequest {
@@ -45,7 +55,7 @@ declare module API {
   interface FriendInfo extends UserInfo {
     id: number
     username: string
-    avatar?: string
+    avatar: string
   }
 
   interface PrivateChat {
