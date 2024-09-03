@@ -6,7 +6,7 @@ import { commonOpReq } from '@/utils/request'
  * @returns
  */
 export const sendPrivateChat = (data: API.PrivateChat) => {
-  return commonOpReq.request({
+  return commonOpReq.request<API.CommonDataRes<API.CreatePrivateChatRes>>({
     method: 'POST',
     url: '/chatroom/create/single',
     data
@@ -59,5 +59,14 @@ export const quitChatRoom = (data: API.QuitChatRoom) => {
 export const getAllChat = () => {
   return commonOpReq.request({
     url: '/chatroom/group/list'
+  })
+}
+
+export const getOneToOneChatHistory = (data: API.FindSingleChatRoomRequest) => {
+  return commonOpReq.request<API.CommonDataRes<API.FindSingleChatRoomRes>>({
+    url: '/chatroom/find/single',
+    params: {
+      friendId: data.friendId
+    }
   })
 }

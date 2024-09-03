@@ -62,6 +62,10 @@ declare module API {
     friendId: number
   }
 
+  interface CreatePrivateChatRes {
+    chatroomId: number
+  }
+
   interface CreateChatRoom {
     name: string
   }
@@ -70,7 +74,11 @@ declare module API {
     chatroomId: number
   }
 
-  interface QuitChatRoom {
+  interface QuitChatRoom extends JoinChatRoom {}
+
+  interface FindSingleChatRoomRequest extends PrivateChat {}
+
+  interface FindSingleChatRoomRes {
     chatroomId: number
   }
 }

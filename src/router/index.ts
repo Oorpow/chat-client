@@ -40,6 +40,11 @@ const router = createRouter({
       path: '/business-card',
       name: 'businessCard',
       component: () => import('@/views/BusinessCard/index.vue')
+    },
+    {
+      path: '/chatroom',
+      name: 'chatroom',
+      component: () => import('@/views/Chatroom/index.vue')
     }
   ]
 })
