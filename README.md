@@ -1,3 +1,9 @@
+# 后端仓库地址
+
+```bash
+https://github.com/Oorpow/chat-server
+```
+
 # 配置别名
 
 默认官方在vite.config.ts文件中配置好了别名，现在还需要去tsconfig.json再进行一次配置，配置如下：
