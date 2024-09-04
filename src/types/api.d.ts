@@ -76,7 +76,15 @@ declare module API {
 
   interface QuitChatRoom extends JoinChatRoom {}
 
+  interface GetChatroomInfoRequest extends JoinChatRoom {}
+
   interface FindSingleChatRoomRequest extends PrivateChat {}
+
+  interface GetChatroomInfoRes extends CommonDate {
+    id: number
+    name: string
+    type: boolean
+  }
 
   interface FindSingleChatRoomRes {
     chatroomId: number

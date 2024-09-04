@@ -62,6 +62,22 @@ export const getAllChat = () => {
   })
 }
 
+/**
+ * 根据id获取聊天室信息
+ * @param data
+ * @returns
+ */
+export const getChatroomInfoById = (data: API.GetChatroomInfoRequest) => {
+  return commonOpReq.request<API.CommonDataRes<API.GetChatroomInfoRes>>({
+    url: `/chatroom/find/${data.chatroomId}`
+  })
+}
+
+/**
+ * 查看当前用户与对方是否存在私聊聊天室
+ * @param data
+ * @returns
+ */
 export const getOneToOneChatHistory = (data: API.FindSingleChatRoomRequest) => {
   return commonOpReq.request<API.CommonDataRes<API.FindSingleChatRoomRes>>({
     url: '/chatroom/find/single',
