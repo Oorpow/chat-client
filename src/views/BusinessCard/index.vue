@@ -41,6 +41,7 @@ function onClickRight() {
 async function handleByIsFriend() {
   if (isYourFriend.value) {
     const { data } = await getOneToOneChatHistory({ friendId: businessCardInfo.value.id })
+
     let queryId
     // 查看是否有私聊记录，有则跳转页面，没有则创建私聊，得到聊天室id后，跳转页面
     if (data.chatroomId) {
@@ -53,7 +54,8 @@ async function handleByIsFriend() {
     router.push({
       path: '/chatroom',
       query: {
-        id: queryId
+        id: queryId,
+        friend: businessCardInfo.value.username
       }
     })
   } else {

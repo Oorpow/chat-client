@@ -89,4 +89,39 @@ declare module API {
   interface FindSingleChatRoomRes {
     chatroomId: number
   }
+
+  interface GetChatHistoryRequest extends JoinChatRoom {}
+
+  interface GetChatHistoryRes {
+    id: number
+    content: string
+    type: number
+    chatroomId: number
+    fromUserId: number
+    // fromUser
+    user?: {
+      id: number
+      username: string
+    }
+  }
+
+  interface ChatMessagePayload {
+    fromUserId: number
+    chatroomId: number
+    message: {
+      type: 'text' | 'image'
+      content: string
+    }
+  }
+
+  interface ChatMessageReply {
+    id: number
+    type: string
+    userId: number
+    message: {
+      type: number
+      content: string
+    }
+    chatroomId: number
+  }
 }
