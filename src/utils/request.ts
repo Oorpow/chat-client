@@ -72,7 +72,7 @@ class OpRequest {
 }
 
 export const commonOpReq = new OpRequest({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: import.meta.env.VITE_HTTP_BASE_URL,
   timeout: 1000 * 10
 })
 
